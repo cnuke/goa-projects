@@ -1,0 +1,9 @@
+genodelabs/api/base
+genodelabs/api/os
+genodelabs/api/gui_session
+genodelabs/api/framebuffer_session
+genodelabs/api/input_session
+genodelabs/api/stdcxx
+genodelabs/api/libc
+jschlatow/api/lvgl
+genodelabs/api/posix
