@@ -1,0 +1,10 @@
+LICENSE   := UNKNOWN
+VERSION   := git
+DOWNLOADS := neatvi.git
+
+URL(neatvi) := https://github.com/aligrudi/neatvi.git
+REV(neatvi) := cfb5f5f6170fa3c66566a81ce2a4d17c60c563aa
+DIR(neatvi) := src
+
+PATCHES   := patches/Makefile.patch
+PATCH_OPT := -p1 -d src
