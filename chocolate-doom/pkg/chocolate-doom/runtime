@@ -1,0 +1,43 @@
+<runtime ram="80M" caps="512" binary="chocolate-doom">
+
+	<requires> <audio_out/> <audio_in/> <gui/> <nic/> <timer/> </requires>
+
+	<config ld_verbose="yes">
+		<arg value="chocolate-doom"/>
+		<libc stdout="/dev/log" stderr="/dev/log" stdin="/dev/null" rtc="/dev/rtc"/>
+		<vfs>
+			<dir name="dev">
+				<log/> <inline name="rtc">2023-09-19 12:00</inline>
+				<null/>
+				<oss/>
+			</dir>
+			<rom name="doom1.wad"/>
+		</vfs>
+	</config>
+
+	<content>
+		<rom label="chocolate-doom"/>
+		<rom label="doom1.wad"/>
+		<rom label="egl.lib.so"/>
+		<rom label="ld.lib.so"/>
+		<rom label="libc.lib.so"/>
+		<rom label="libiconv.lib.so"/>
+		<rom label="libm.lib.so"/>
+		<rom label="libdrm.lib.so"/>
+		<rom label="libFLAC.lib.so"/>
+		<rom label="libogg.lib.so"/>
+		<rom label="libvorbis.lib.so"/>
+		<rom label="expat.lib.so"/>
+		<rom label="glapi.lib.so"/>
+		<rom label="mesa.lib.so"/>
+		<rom label="sdl2.lib.so"/>
+		<rom label="sdl2_mixer.lib.so"/>
+		<rom label="sdl2_net.lib.so"/>
+		<rom label="stdcxx.lib.so"/>
+		<rom label="vfs.lib.so"/>
+		<rom label="vfs_gpu.lib.so"/>
+		<rom label="vfs_oss.lib.so"/>
+		<rom label="zlib.lib.so"/>
+	</content>
+
+</runtime>

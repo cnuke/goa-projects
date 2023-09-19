@@ -1,0 +1,5 @@
+cnuke/api/libc
+cnuke/api/sdl2
+cnuke/api/sdl2_mixer
+cnuke/api/sdl2_net
+cnuke/api/zlib

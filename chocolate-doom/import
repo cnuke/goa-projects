@@ -1,0 +1,10 @@
+LICENSE   := GPLv2
+VERSION   := git
+DOWNLOADS := chocolate-doom.git
+
+URL(chocolate-doom) := https://github.com/chocolate-doom/chocolate-doom.git
+# pick commit before bumping to SDL 2.0.14
+REV(chocolate-doom) := 640de9f333b7df41fae880863e4fe4ddd497f7b3
+DIR(chocolate-doom) := src
+
+PATCHES := patches/cmake_modules_path.patch
