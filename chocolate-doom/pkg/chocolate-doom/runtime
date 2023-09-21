@@ -9,7 +9,7 @@
 			<dir name="dev">
 				<log/> <inline name="rtc">2023-09-19 12:00</inline>
 				<null/>
-				<oss/>
+				<oss name="dsp"/>
 			</dir>
 			<rom name="doom1.wad"/>
 		</vfs>
