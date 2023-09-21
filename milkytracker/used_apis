@@ -1,0 +1,6 @@
+cnuke/api/base
+cnuke/api/libc
+cnuke/api/mesa
+cnuke/api/sdl2
+cnuke/api/stdcxx
+cnuke/api/zlib

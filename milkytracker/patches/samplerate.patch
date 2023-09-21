@@ -1,0 +1,15 @@
++++ src/src/milkyplay/drivers/sdl/AudioDriver_SDL.cpp	2023-09-21 17:41:26.564000000 +0200
+@@ -94,6 +94,13 @@
+ 	// Some soundcard drivers modify the wanted structure, so we copy it here
+ 	memcpy(&saved, &wanted, sizeof(wanted));
+ 
++	/*
++	 * Override sample rate with the one Audio_out currently supports
++	 * and let the tracker figure out the rest. Ideally we should
++	 * support the SDL_AUDIO_ALLOW_FREQUENCY_CHANGE flag.
++	 */
++	wanted.freq = 44100;
++
+ 	device = SDL_OpenAudioDevice(NULL, false, &wanted, &obtained, SDL_AUDIO_ALLOW_FREQUENCY_CHANGE);
+ 
+ 	if (device == 0)

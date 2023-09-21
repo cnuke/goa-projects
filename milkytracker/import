@@ -1,0 +1,13 @@
+LICENSE   := GPLv3
+VERSION   := 1.04.00
+DOWNLOADS := milkytracker.archive
+
+BASE_URL := https://github.com/milkytracker/MilkyTracker/archive/refs/tags
+
+URL(milkytracker) := $(BASE_URL)/v$(VERSION).tar.gz
+SHA(milkytracker) := 29b9c9572ad8bf8f4add2de19c3f8fb0382738763a92e76f3d01dea82c40ff72
+DIR(milkytracker) := src
+
+PATCHES := patches/cmake.patch \
+           patches/samplerate.patch \
+           patches/src_tracker.patch

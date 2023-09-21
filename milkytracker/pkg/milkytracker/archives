@@ -1,0 +1,14 @@
+cnuke/src/black_hole
+cnuke/src/expat
+cnuke/src/init
+cnuke/src/libc
+cnuke/src/libdrm
+cnuke/src/libiconv
+cnuke/src/mesa
+cnuke/src/sdl2
+cnuke/src/stdcxx
+cnuke/src/vfs
+cnuke/src/vfs_gpu
+cnuke/src/vfs_oss
+cnuke/src/milkytracker/1.04.00-2023-09-21
+cnuke/src/zlib
