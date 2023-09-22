@@ -14,5 +14,6 @@ cnuke/src/sdl2_net
 cnuke/src/stdcxx
 cnuke/src/vfs
 cnuke/src/vfs_gpu
+cnuke/src/vfs_lwip
 cnuke/src/vfs_oss
 cnuke/src/zlib

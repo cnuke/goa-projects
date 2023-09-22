@@ -4,13 +4,19 @@
 
 	<config ld_verbose="yes">
 		<arg value="chocolate-doom"/>
-		<libc stdout="/dev/log" stderr="/dev/log" stdin="/dev/null" rtc="/dev/rtc"/>
+		<!--
+		<arg value="-connect"/>
+		<arg value="42.42.42.42"/>
+		-->
+		<libc stdout="/dev/log" stderr="/dev/log" stdin="/dev/null"
+		      rtc="/dev/rtc" socket="/socket"/>
 		<vfs>
 			<dir name="dev">
 				<log/> <inline name="rtc">2023-09-19 12:00</inline>
 				<null/>
 				<oss name="dsp"/>
 			</dir>
+			<dir name="socket"> <lwip dhcp="yes"/> </dir>
 			<rom name="doom1.wad"/>
 		</vfs>
 	</config>
@@ -36,6 +42,7 @@
 		<rom label="stdcxx.lib.so"/>
 		<rom label="vfs.lib.so"/>
 		<rom label="vfs_gpu.lib.so"/>
+		<rom label="vfs_lwip.lib.so"/>
 		<rom label="vfs_oss.lib.so"/>
 		<rom label="zlib.lib.so"/>
 	</content>
