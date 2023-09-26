@@ -1,0 +1,2 @@
+set license src/LICENSE.txt
+set warn_strict 0

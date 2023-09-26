@@ -1,0 +1,13 @@
+LICENSE   := AGPLv3
+VERSION   := git
+DOWNLOADS := linphone-sdk.git
+
+
+URL(linphone-sdk) := https://gitlab.linphone.org/BC/public/linphone-sdk.git
+REV(linphone-sdk) := 2ed9fc100486010d4c93a83640276d6093d4e38d
+DIR(linphone-sdk) := src
+
+# XXX find hook
+#default : submodules
+#submodules : $(DOWNLOADS)
+#	$(VERBOSE)git submodule update --init --recursive
