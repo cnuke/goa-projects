@@ -1,0 +1,91 @@
+<runtime ram="80M" caps="550" binary="init">
+
+	<requires>
+		<gui/>
+		<gpu/>
+		<audio_out/>
+		<timer/>
+		<rom label="mesa_gpu_drv.lib.so"/>
+		<file_system label="home"/>
+	</requires>
+
+	<content>
+		<rom label="black_hole"/>
+		<rom label="egl.lib.so"/>
+		<rom label="expat.lib.so"/>
+		<rom label="glapi.lib.so"/>
+		<rom label="init"/>
+		<rom label="ld.lib.so"/>
+		<rom label="libc.lib.so"/>
+		<rom label="libdrm.lib.so"/>
+		<rom label="libiconv.lib.so"/>
+		<rom label="libm.lib.so"/>
+		<rom label="mesa.lib.so"/>
+		<rom label="schismtracker"/>
+		<rom label="sdl2.lib.so"/>
+		<rom label="stdcxx.lib.so"/>
+		<rom label="vfs.lib.so"/>
+		<rom label="vfs_gpu.lib.so"/>
+		<rom label="vfs_oss.lib.so"/>
+		<rom label="vfs_pipe.lib.so"/>
+		<rom label="zlib.lib.so"/>
+	</content>
+
+	<config>
+		<parent-provides>
+			<service name="ROM"/>
+			<service name="PD"/>
+			<service name="RM"/>
+			<service name="CPU"/>
+			<service name="LOG"/>
+			<service name="Gui"/>
+			<service name="Timer"/>
+			<service name="Gpu"/>
+			<service name="Audio_out"/>
+			<service name="File_system"/>
+		</parent-provides>
+
+		<default-route> <any-service> <parent/> <any-child/> </any-service> </default-route>
+
+		<start name="black_hole" caps="100">
+			<resource name="RAM" quantum="1M"/>
+			<provides> <service name="Audio_in"/> </provides>
+			<config>
+				<audio_in/>
+			</config>
+			<route>
+				<any-service> <parent/> <any-child/> </any-service>
+			</route>
+		</start>
+
+		<start name="schismtracker" caps="400">
+			<resource name="RAM" quantum="64M"/>
+			<exit propagate="yes"/>
+			<config ld_verbose="yes">
+				<env key="HOME" value="/home"/>
+				<vfs>
+					<dir name="dev">
+						<log/> <oss name="dsp"/> <gpu/>
+						<inline name="rtc">2023-09-21 12:00</inline>
+						<dir name="pipe"> <pipe/> </dir>
+					</dir>
+					<dir name="home">
+						<fs label="home"/>
+					</dir>
+				</vfs>
+				<libc stdout="/dev/log" stderr="/dev/log" rtc="/dev/rtc"
+				      pipe="/dev/pipe"/>
+			</config>
+			<route>
+				<service name="ROM" label="mesa_gpu_drv.lib.so">
+					<parent label="mesa_gpu_drv.lib.so"/>
+				</service>
+				<service name="Audio_in">
+					<child name="black_hole"/>
+				</service>
+				<any-service> <parent/> <any-child/> </any-service>
+			</route>
+		</start>
+	</config>
+
+</runtime>

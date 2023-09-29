@@ -1,0 +1,15 @@
+jws/src/black_hole
+jws/src/expat
+jws/src/init
+jws/src/libc
+jws/src/libdrm
+jws/src/libiconv
+jws/src/mesa
+jws/src/sdl2
+jws/src/stdcxx
+jws/src/vfs
+jws/src/vfs_gpu
+jws/src/vfs_oss
+jws/src/vfs_pipe
+jws/src/schismtracker/202309060-2023-09-29
+jws/src/zlib

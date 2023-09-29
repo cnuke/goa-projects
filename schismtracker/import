@@ -1,0 +1,9 @@
+LICENSE   := GPLv3
+VERSION   := 20230906
+DOWNLOADS := schismtracker.archive
+
+BASE_URL := https://github.com/schismtracker/schismtracker/archive/refs/tags
+
+URL(schismtracker) := $(BASE_URL)/$(VERSION).tar.gz
+SHA(schismtracker) := 8a80457f8199bf912eec721f87c8f412379dfb5a53b5860c56a2598cfc274e3d
+DIR(schismtracker) := src
