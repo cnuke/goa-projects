@@ -8,7 +8,6 @@ ssumpf_test/src/terminal
 ssumpf_test/src/vfs
 ssumpf_test/src/vfs_jitterentropy
 ssumpf_test/src/vfs_lxip
-ssumpf_test/src/vfs_lwip
 ssumpf_test/src/vfs_oss
 ssumpf_test/src/vfs_pipe
 ssumpf_test/src/vfs_ttf
