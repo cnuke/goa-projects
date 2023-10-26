@@ -11,5 +11,5 @@ jws/src/vfs
 jws/src/vfs_gpu
 jws/src/vfs_oss
 jws/src/vfs_pipe
-jws/src/schismtracker/202309060-2023-09-29
+jws/src/schismtracker/202309060-2023-10-26
 jws/src/zlib
