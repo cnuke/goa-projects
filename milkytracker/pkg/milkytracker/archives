@@ -10,5 +10,4 @@ jws/src/stdcxx
 jws/src/vfs
 jws/src/vfs_gpu
 jws/src/vfs_oss
-jws/src/milkytracker/1.04.00-2023-10-26
 jws/src/zlib
