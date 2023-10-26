@@ -1,4 +1,3 @@
-cnuke/raw/quake2-demo-pak/21.10
 cnuke/src/black_hole
 cnuke/src/curl
 cnuke/src/expat
@@ -18,5 +17,4 @@ cnuke/src/stdcxx
 cnuke/src/vfs
 cnuke/src/vfs_gpu
 cnuke/src/vfs_oss
-cnuke/src/yquake2/8.00-2023-09-19
 cnuke/src/zlib
