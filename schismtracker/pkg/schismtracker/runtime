@@ -29,7 +29,6 @@
 		<rom label="vfs_oss.lib.so"/>
 		<rom label="vfs_pipe.lib.so"/>
 		<rom label="zlib.lib.so"/>
-		<rom label="class01.mod"/>
 	</content>
 
 	<config>
