@@ -1,5 +1,7 @@
 <runtime ram="10M" caps="1000" binary="vi">
 
+	<requires> <file_system/> <terminal/> </requires>
+
 	<config>
 		<libc stdin="/dev/terminal" stdout="/dev/terminal"
 		      stderr="/dev/terminal" rtc="/dev/rtc"/>
