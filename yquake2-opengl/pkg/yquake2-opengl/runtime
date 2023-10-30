@@ -1,0 +1,113 @@
+<runtime ram="256M" caps="5600" binary="init">
+
+	<requires>
+		<gui/>
+		<gpu/>
+		<audio_out/>
+		<timer/>
+		<rom label="mesa_gpu_drv.lib.so"/>
+	</requires>
+
+	<content>
+		<rom label="black_hole"/>
+		<rom label="curl.lib.so"/>
+		<rom label="egl.lib.so"/>
+		<rom label="expat.lib.so"/>
+		<rom label="game.lib.so"/>
+		<rom label="glapi.lib.so"/>
+		<rom label="init"/>
+		<rom label="jpeg.lib.so"/>
+		<rom label="ld.lib.so"/>
+		<rom label="libc.lib.so"/>
+		<rom label="libcrypto.lib.so"/>
+		<rom label="libdrm.lib.so"/>
+		<rom label="libiconv.lib.so"/>
+		<rom label="libm.lib.so"/>
+		<rom label="libpng.lib.so"/>
+		<rom label="libssh.lib.so"/>
+		<rom label="libssl.lib.so"/>
+		<rom label="mesa.lib.so"/>
+		<rom label="pak0.pak"/>
+		<rom label="quake2"/>
+		<rom label="ref_gl1.lib.so"/>
+		<rom label="ref_gl3.lib.so"/>
+		<rom label="ref_soft.lib.so"/>
+		<rom label="sdl2.lib.so"/>
+		<rom label="stdcxx.lib.so"/>
+		<rom label="vfs.lib.so"/>
+		<rom label="vfs_gpu.lib.so"/>
+		<rom label="vfs_oss.lib.so"/>
+		<rom label="zlib.lib.so"/>
+	</content>
+
+	<config>
+		<parent-provides>
+			<service name="ROM"/>
+			<service name="PD"/>
+			<service name="RM"/>
+			<service name="CPU"/>
+			<service name="LOG"/>
+			<service name="Gui"/>
+			<service name="Timer"/>
+			<service name="Gpu"/>
+			<service name="Audio_out"/>
+		</parent-provides>
+
+		<default-route> <any-service> <parent/> <any-child/> </any-service> </default-route>
+
+		<start name="black_hole" caps="100">
+			<resource name="RAM" quantum="1M"/>
+			<provides> <service name="Audio_in"/> </provides>
+			<config>
+				<audio_in/>
+			</config>
+			<route>
+				<any-service> <parent/> <any-child/> </any-service>
+			</route>
+		</start>
+
+		<start name="quake2" caps="5000">
+			<resource name="RAM" quantum="250M"/>
+			<exit propagate="yes"/>
+			<config ld_verbose="yes">
+				<vfs>
+					<dir name="dev"> <log/> <oss name="dsp"/> <gpu/> </dir>
+					<dir name="baseq2">
+						<ram/>
+						<rom name="pak0.pak"/>
+						<rom name="game.so"/>
+					</dir>
+					<rom name="ref_soft.so"/>
+					<rom name="ref_gl1.so"/>
+					<!--<rom name="ref_gl3.so"/>-->
+				</vfs>
+				<libc stdout="/dev/log" stderr="/dev/log"/>
+			</config>
+			<route>
+				<service name="ROM" label="game.so">
+					<parent label="game.lib.so"/>
+				</service>
+				<service name="ROM" label="ref_soft.so">
+					<parent label="ref_soft.lib.so"/>
+				</service>
+				<service name="ROM" label="ref_gl1.so">
+					<parent label="ref_gl1.lib.so"/>
+				</service>
+				<service name="ROM" label="ref_gl3.so">
+					<parent label="ref_gl3.lib.so"/>
+				</service>
+				<service name="ROM" label="libcurl.so">
+					<parent label="curl.lib.so"/>
+				</service>
+				<service name="ROM" label="mesa_gpu_drv.lib.so">
+					<parent label="mesa_gpu_drv.lib.so"/>
+				</service>
+				<service name="Audio_in">
+					<child name="black_hole"/>
+				</service>
+				<any-service> <parent/> <any-child/> </any-service>
+			</route>
+		</start>
+	</config>
+
+</runtime>
