@@ -1,0 +1,215 @@
+
+<config>
+	<parent-provides>
+		<service name="ROM"/>
+		<service name="PD"/>
+		<service name="RM"/>
+		<service name="CPU"/>
+		<service name="LOG"/>
+		<service name="TRACE"/>
+	</parent-provides>
+
+
+	<start name="timer" caps="100">
+		<resource name="RAM" quantum="1M"/>
+		<provides><service name="Timer"/></provides>
+		<route>
+			<service name="PD">  <parent/> </service>
+			<service name="CPU"> <parent/> </service>
+			<service name="LOG"> <parent/> </service>
+			<service name="ROM"> <parent/> </service>
+		</route>
+	</start>
+
+	<start name="drivers" caps="1000">
+		<resource name="RAM" quantum="32M" constrain_phys="yes"/>
+		<binary name="init"/>
+		<route>
+			<service name="ROM" label="config"> <parent label="drivers.config"/> </service>
+			<service name="Timer">   <child name="timer"/> </service>
+			<service name="Capture"> <child name="nitpicker"/> </service>
+			<service name="Event">   <child name="nitpicker"/> </service>
+			<any-service> <parent/> </any-service>
+		</route>
+	</start>
+
+	<start name="report_rom" caps="100">
+		<resource name="RAM" quantum="1M"/>
+		<provides> <service name="Report"/> <service name="ROM"/> </provides>
+		<config verbose="no">
+			<policy label_prefix="focus_rom" report="nitpicker -> hover"/>
+		</config>
+		<route>
+			<service name="PD">  <parent/> </service>
+			<service name="CPU"> <parent/> </service>
+			<service name="LOG"> <parent/> </service>
+			<service name="ROM"> <parent/> </service>
+		</route>
+	</start>
+
+	<start name="focus_rom" caps="100">
+		<binary name="rom_filter"/>
+		<resource name="RAM" quantum="1M"/>
+		<provides> <service name="ROM"/> </provides>
+		<config>
+			<input name="hovered_label" rom="hover" node="hover">
+				<attribute name="label" />
+			</input>
+			<output node="focus">
+				<attribute name="label" input="hovered_label"/>
+			</output>
+		</config>
+		<route>
+			<service name="ROM" label="hover"> <child name="report_rom"/> </service>
+			<service name="PD">  <parent/> </service>
+			<service name="CPU"> <parent/> </service>
+			<service name="LOG"> <parent/> </service>
+			<service name="ROM"> <parent/> </service>
+		</route>
+	</start>
+
+	<start name="nitpicker" caps="100">
+		<resource name="RAM" quantum="4M"/>
+		<provides>
+			<service name="Gui"/> <service name="Capture"/> <service name="Event"/>
+		</provides>
+		<route>
+			<service name="ROM" label="focus"> <child name="focus_rom"/> </service>
+			<service name="PD">  <parent/> </service>
+			<service name="CPU"> <parent/> </service>
+			<service name="LOG"> <parent/> </service>
+			<service name="ROM"> <parent/> </service>
+			<service name="Timer">  <child name="timer"/> </service>
+			<service name="Report"> <child name="report_rom"/> </service>
+		</route>
+		<config focus="rom">
+			<capture/> <event/>
+			<report hover="yes"/>
+			<domain name="pointer" layer="1" content="client" label="no" origin="pointer" />
+			<domain name="default" layer="2" content="client" label="no" hover="always"/>
+
+			<policy label_prefix="pointer" domain="pointer"/>
+			<default-policy domain="default"/>
+		</config>
+	</start>
+
+	<start name="pointer" caps="100">
+		<resource name="RAM" quantum="1M"/>
+		<route>
+			<service name="PD">  <parent/> </service>
+			<service name="CPU"> <parent/> </service>
+			<service name="LOG"> <parent/> </service>
+			<service name="ROM"> <parent/> </service>
+			<service name="Gui"> <child name="nitpicker"/> </service>
+		</route>
+		<config/>
+	</start>
+
+	<start name="black_hole" caps="100">
+		<resource name="RAM" quantum="2M"/>
+		<provides>
+			<service name="Gpu"/>
+			<service name="Audio_out"/>
+		</provides>
+		<config>
+			<gpu/>
+			<audio_out/>
+		</config>
+		<route>
+			<service name="PD">  <parent/> </service>
+			<service name="CPU"> <parent/> </service>
+			<service name="LOG"> <parent/> </service>
+			<service name="ROM"> <parent/> </service>
+			<service name="Timer">  <child name="timer"/> </service>
+		</route>
+	</start>
+
+
+	<start name="yquake2-opengl" caps="5600">
+		<resource name="RAM" quantum="256M"/>
+		<binary name="init"/>
+		<provides></provides>
+		<route>
+			<service name="Timer"> <child name="timer"/> </service>
+			<service name="Gui"> <child name="nitpicker"/> </service>
+			<service name="ROM" label="mesa_gpu_drv.lib.so"> <parent label="mesa_gpu-softpipe.lib.so"/> </service>
+			<service name="Gpu"> <child name="black_hole"/> </service>
+			<service name="Audio_out"> <child name="black_hole"/> </service>
+			<service name="ROM">   <parent/> </service>
+			<service name="PD">    <parent/> </service>
+			<service name="RM">    <parent/> </service>
+			<service name="CPU">   <parent/> </service>
+			<service name="LOG">   <parent/> </service>
+		</route>
+		<config>
+<parent-provides>
+	<service name="ROM"/>
+	<service name="PD"/>
+	<service name="RM"/>
+	<service name="CPU"/>
+	<service name="LOG"/>
+	<service name="Gui"/>
+	<service name="Timer"/>
+	<service name="Gpu"/>
+	<service name="Audio_out"/>
+</parent-provides>
+
+<default-route> <any-service> <parent/> <any-child/> </any-service> </default-route>
+
+<start name="black_hole" caps="100">
+	<resource name="RAM" quantum="1M"/>
+	<provides> <service name="Audio_in"/> </provides>
+	<config>
+		<audio_in/>
+	</config>
+	<route>
+		<any-service> <parent/> <any-child/> </any-service>
+	</route>
+</start>
+
+<start name="quake2" caps="5000">
+	<resource name="RAM" quantum="250M"/>
+	<exit propagate="yes"/>
+	<config ld_verbose="yes">
+		<vfs>
+			<dir name="dev"> <log/> <oss name="dsp"/> <gpu/> </dir>
+			<dir name="baseq2">
+				<ram/>
+				<rom name="pak0.pak"/>
+				<rom name="game.so"/>
+			</dir>
+			<rom name="ref_soft.so"/>
+			<rom name="ref_gl1.so"/>
+			<!--<rom name="ref_gl3.so"/>-->
+		</vfs>
+		<libc stdout="/dev/log" stderr="/dev/log"/>
+	</config>
+	<route>
+		<service name="ROM" label="game.so">
+			<parent label="game.lib.so"/>
+		</service>
+		<service name="ROM" label="ref_soft.so">
+			<parent label="ref_soft.lib.so"/>
+		</service>
+		<service name="ROM" label="ref_gl1.so">
+			<parent label="ref_gl1.lib.so"/>
+		</service>
+		<service name="ROM" label="ref_gl3.so">
+			<parent label="ref_gl3.lib.so"/>
+		</service>
+		<service name="ROM" label="libcurl.so">
+			<parent label="curl.lib.so"/>
+		</service>
+		<service name="ROM" label="mesa_gpu_drv.lib.so">
+			<parent label="mesa_gpu_drv.lib.so"/>
+		</service>
+		<service name="Audio_in">
+			<child name="black_hole"/>
+		</service>
+		<any-service> <parent/> <any-child/> </any-service>
+	</route>
+</start>
+	</config>
+	</start>
+</config>
+
