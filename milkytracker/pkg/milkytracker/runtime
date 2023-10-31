@@ -74,7 +74,7 @@
 					</dir>
 					<dir name="home">
 						<fs/>
-					<dir>
+					</dir>
 				</vfs>
 				<libc stdout="/dev/log" stderr="/dev/log" rtc="/dev/rtc"/>
 			</config>
