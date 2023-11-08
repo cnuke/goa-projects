@@ -80,11 +80,11 @@ Page {
 
         //Check if opened the app because we have an incoming call
         if (args.values.url && (args.values.url.match(/^linphone/) || args.values.url.match(/^sip/))) {
-            console.log("Incoming Call on Closed App");
+            //console.log("Incoming Call on Closed App");
             handleUrl(args.values.url);
 
         } else if (Qt.application.arguments && Qt.application.arguments.length > 0) {
-            console.log("Incoming Call fromArguments")
+            //console.log("Incoming Call fromArguments")
 
             //TODO: Do we need to handle more than 1 url?
             for (var i = 0; i < Qt.application.arguments.length; i++) {
@@ -216,10 +216,10 @@ Page {
         target: UriHandler
 
         onOpened: {
-            console.log('Open from UriHandler')
+            //console.log('Open from UriHandler')
 
             if (uris.length > 0) {
-                console.log('Incoming call from UriHandler ' + uris[0]);
+                //console.log('Incoming call from UriHandler ' + uris[0]);
                 handleUrl(uris[0]);
             }
         }
@@ -235,7 +235,7 @@ Page {
 
             //No calls
             if (statusTextReceived.indexOf("No active call") !== -1) { //No need for a « && incomingCall» as we only get this when in a call we ask for «generic calls»
-                console.log("onReadStatus: No active calls");
+                //console.log("onReadStatus: No active calls");
                 incomingCall = false;
                 //This should be done in IncomingCall.qml
                 onCallFav = false;
@@ -264,16 +264,16 @@ Page {
                 registered = true;
 
             } else if (statusTextReceived.indexOf("registered=") !== -1) {
-                console.log("onReadStatus: Account offline");
+                //console.log("onReadStatus: Account offline");
                 activeAccount.account = i18n.tr("offline");
                 registered = false;
             }
 
             //Check if we are reciving an incoming call but we are not already in one
             if (statusTextReceived.indexOf("incoming call") !== -1 || statusTextReceived.indexOf("IncomingReceived") !== -1) {
-                console.log("onReadStatus: IncomingReceived");
+                //console.log("onReadStatus: IncomingReceived");
                 if (!incomingCall) {
-                    console.log("onReadStatus: on IncomingReceived and !incomingCall");
+                    //console.log("onReadStatus: on IncomingReceived and !incomingCall");
                     incomingCall = true;
 
                     // extract '... <sip:foo@domain.tld>, ...' -> foo, domain.tld
@@ -282,17 +282,17 @@ Page {
                     caller = caller.replace(/\>,$/, "").split("@");
 
                     showIncomingCall(caller);
-                } else console.log("We are receiving a call but we are already in one");
+                } //else console.log("We are receiving a call but we are already in one");
 
             } //else console.log("onReadStatus: not IncomingReceived");
 
             if (statusTextReceived.indexOf("OutgoingRinging") !== -1 && !incomingCall) {
-                console.log("onReadStatus: OutgoingRinging");
+                //console.log("onReadStatus: OutgoingRinging");
             }
 
             //We are in a call
             if (statusTextReceived.indexOf("StreamsRunning") !== -1 && !incomingCall) {
-                console.log("onReadStatus: StreamsRunning");
+                //console.log("onReadStatus: StreamsRunning");
                 answered = true;
             }
 
@@ -360,7 +360,7 @@ Page {
 
     function checkBeforeCall(sipNumber) {
         if (!onCall) {
-            console.log("Try to call to " + sipNumber)
+            //console.log("Try to call to " + sipNumber)
             onCall = true
             mainCol.visible = false
 
@@ -392,7 +392,7 @@ Page {
         } else {
             // !onCall
             sipCall.text = ""
-            console.log("Hanging up")
+            //console.log("Hanging up")
             Linphone.terminate()
             Linphone.enableSpeaker();
             speakerEnabled = true;

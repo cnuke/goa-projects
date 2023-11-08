@@ -103,7 +103,7 @@ function getFavorite(id) {
         } else {
             fav_name = null;
             fav_sipaddress = null;
-            console.log("getFavorite: info set to null");
+            //console.log("getFavorite: info set to null");
         }
 
     });

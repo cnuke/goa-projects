@@ -83,8 +83,6 @@ void Linphone::registerSIP(QString user, QString domain, QString password)
 	QStringList args;
 	args << "register" << identity << transport << password << "\n";
 
-	qDebug() << __func__ << "args" << args.join(" ");
-
 	if (!dispatch(_write_fd, args.join(" ")))
 		qDebug() << __func__ << "failed";
 }
@@ -117,9 +115,7 @@ QString Linphone::readStatusOutput()
 
 	buffer[n] = 0;
 
-	QString result(buffer);
-	qDebug() << __func__ << "result: '" << result << "'";
-	return result;
+	return QString(buffer);
 }
 
 

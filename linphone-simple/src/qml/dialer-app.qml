@@ -88,7 +88,7 @@ MainView {
 
         Component.onCompleted: {
             if (!serviceFileInstalled) {
-                console.log('Service file not installed, installing now')
+                //console.log('Service file not installed, installing now')
                 installServiceFile(linphoneSettings.exitLinphoneCompletly);
             }
 
@@ -101,7 +101,7 @@ MainView {
             Linphone.setConfig('sound/local_ring', '/opt/click.ubuntu.com/linphone.cibersheep/current/ringtones/Ubuntu.wav')
 
             if (!serviceRunning) {
-                console.log('Service not running, starting now')
+                //console.log('Service not running, starting now')
                 startService();
             }
 
@@ -129,7 +129,7 @@ MainView {
 
     Component.onDestruction: {
         if (linphoneSettings.exitLinphoneCompletly) {
-            console.log("Stopping Service and Closing App")
+            //console.log("Stopping Service and Closing App")
             serviceControl.stopService()
         }
     }
