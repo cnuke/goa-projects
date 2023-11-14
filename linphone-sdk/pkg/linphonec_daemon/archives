@@ -8,3 +8,4 @@ cnuke/src/vfs_jitterentropy
 cnuke/src/vfs_lxip
 cnuke/src/vfs_oss
 cnuke/src/vfs_pipe
+cnuke/src/vfs_resolvconf
