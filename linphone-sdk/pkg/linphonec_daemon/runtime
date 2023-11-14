@@ -42,6 +42,7 @@
 		<rom label="vfs_lxip.lib.so"/>
 		<rom label="vfs_oss.lib.so"/>
 		<rom label="vfs_pipe.lib.so"/>
+		<rom label="vfs_resolvconf.lib.so"/>
 		<rom label="daemon.config"/>
 		<rom label="factory.settings"/>
 		<rom label="share-belr.tar"/>

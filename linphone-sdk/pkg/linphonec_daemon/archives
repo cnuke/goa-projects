@@ -8,3 +8,4 @@ ssumpf_test/src/vfs_jitterentropy
 ssumpf_test/src/vfs_lxip
 ssumpf_test/src/vfs_oss
 ssumpf_test/src/vfs_pipe
+ssumpf_test/src/vfs_resolvconf
