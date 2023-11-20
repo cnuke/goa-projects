@@ -1,0 +1,11 @@
+cnuke/src/dummy_rtc_drv
+cnuke/src/global_keys_handler
+cnuke/src/init
+cnuke/src/libc
+cnuke/src/libpng
+cnuke/src/report_rom
+cnuke/src/sandbox
+cnuke/src/screenshot_trigger
+cnuke/src/system_rtc
+cnuke/src/vfs
+cnuke/src/zlib
