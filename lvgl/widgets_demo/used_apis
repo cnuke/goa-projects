@@ -1,5 +1,5 @@
 genodelabs/api/base
 genodelabs/api/libc
-jschlatow/api/lvgl
-jschlatow/api/lvgl_support
-jschlatow/api/lvgl_demos
+jws/api/lvgl
+jws/api/lvgl_support
+jws/api/lvgl_demos
