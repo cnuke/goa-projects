@@ -1,0 +1,6 @@
+set  version(jws/api/lvgl)         2023-12-12
+set  version(jws/api/lvgl_demos)   2023-12-11
+set  version(jws/api/lvgl_support) 2023-12-13
+set  version(jws/src/lvgl)         2023-12-12
+set  version(jws/src/lvgl_demos)   2023-12-11
+set  version(jws/src/lvgl_support) 2023-12-13
