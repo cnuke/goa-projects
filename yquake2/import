@@ -8,4 +8,4 @@ URL(yquake2) := $(BASE_URL)/QUAKE2_$(VERSION).tar.gz
 SHA(yquake2) := 44114a766d0b05f6a5da2cb77e7a6a1c4795118f8d60d521097d2e9728f63348
 DIR(yquake2) := src
 
-PATCHES := patches/genode-wip.patch
+PATCHES := $(add-prefix patches/,cmake_modules.patch genode-wip.patch)
