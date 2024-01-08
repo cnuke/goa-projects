@@ -2,7 +2,7 @@ Extended the module path rather than overriding.
 +++ src/CMakeLists.txt	2023-09-19 14:06:16.596000000 +0200
 @@ -1,4 +1,4 @@
 -set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
++set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/cmake}")
  
  cmake_minimum_required(VERSION 3.7.2)
  project("Chocolate Doom" VERSION 3.0.0 LANGUAGES C)
