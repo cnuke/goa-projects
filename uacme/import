@@ -1,0 +1,11 @@
+LICENSE   := GPLv3
+VERSION   := v1.7.4
+DOWNLOADS := uacme.archive
+
+BASE_URL := https://github.com/ndilieto/uacme/archive/refs/tags
+
+URL(uacme) := $(BASE_URL)/$(VERSION).tar.gz
+SHA(uacme) := 0fd3e35218d575321e70dc3489ec3463d015c56c138e99e5add32ab7e5a48d09
+DIR(uacme) := src
+
+PATCHES := patches/configure-libev.patch

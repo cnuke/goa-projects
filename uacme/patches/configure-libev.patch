@@ -1,0 +1,31 @@
+For now use the included libev and force usage of select as kqueue is
+not supported and poll currently a wrapper around select anyway.
+--- src/configure.ac
++++ src/configure.ac
+@@ -370,10 +370,11 @@
+     LIBS=
+     AC_SEARCH_LIBS([sem_init], [pthread], [],
+                    AC_MSG_ERROR([sem_init not found]))
+-    AC_SEARCH_LIBS([ev_version_major], [ev], [],
+-                   [AC_MSG_NOTICE([libev not found, using included copy])
+-                    with_included_libev=yes
+-                    m4_include([libev/libev.m4])])
++
++    AC_MSG_NOTICE([libev using included copy])
++    with_included_libev=yes
++    m4_include([libev/libev.m4])
++
+     UALPN_LDADD=$LIBS
+     LIBS=$LIBS_ORIG
+ fi
+--- src/libev/libev.m4
++++ src/libev/libev.m4
+@@ -5,7 +5,7 @@
+ AC_CHECK_HEADERS(sys/inotify.h sys/epoll.h sys/event.h port.h poll.h sys/timerfd.h)
+ AC_CHECK_HEADERS(sys/select.h sys/eventfd.h sys/signalfd.h linux/aio_abi.h linux/fs.h)
+  
+-AC_CHECK_FUNCS(inotify_init epoll_ctl kqueue port_create poll select eventfd signalfd)
++AC_CHECK_FUNCS(select)
+  
+ AC_CHECK_FUNCS(clock_gettime, [], [
+    dnl on linux, try syscall wrapper first

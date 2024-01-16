@@ -1,0 +1,4 @@
+--with-openssl
+--without-gnutls
+--without-mbedtls
+--disable-docs

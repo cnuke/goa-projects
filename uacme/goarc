@@ -1,0 +1,2 @@
+set license src/COPYING
+set warn_strict 0
