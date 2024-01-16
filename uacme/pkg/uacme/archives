@@ -1,0 +1,10 @@
+cnuke/src/curl
+cnuke/src/libc
+cnuke/src/libssh
+cnuke/src/openssl
+cnuke/src/posix
+cnuke/src/vfs
+cnuke/src/vfs_jitterentropy
+cnuke/src/vfs_lxip
+cnuke/src/vfs_pipe
+cnuke/src/zlib

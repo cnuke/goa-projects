@@ -1,0 +1,51 @@
+<runtime ram="32M" caps="200" binary="uacme">
+	<requires>
+		<file_system/>
+		<nic/>
+		<rtc/>
+		<timer/>
+	</requires>
+
+	<config ld_verbose="true">
+
+		<env key="HOME" value="/home"/>
+
+		<arg value="uacme"/>
+
+		<libc stdin="/dev/null" stdout="/dev/log" stderr="/dev/log"
+		      rtc="/dev/rtc" socket="/socket" pipe="/pipe" rng="/dev/random">
+		</libc>
+
+		<vfs>
+			<dir name="dev">
+				<log/> <null/>
+				<jitterentropy name="random"/>
+				<rtc/>
+			</dir>
+			<dir name="pipe"> <pipe/> </dir>
+			<dir name="socket"> <lxip dhcp="yes"/> </dir>
+
+			<dir name="home">
+				<ram/>
+			</dir>
+			<fs/>
+		</vfs>
+	</config>
+
+	<content>
+		<rom label="curl.lib.so"/>
+		<rom label="libc.lib.so"/>
+		<rom label="libcrypto.lib.so"/>
+		<rom label="libm.lib.so"/>
+		<rom label="libssh.lib.so"/>
+		<rom label="libssl.lib.so"/>
+		<rom label="lxip.lib.so"/>
+		<rom label="posix.lib.so"/>
+		<rom label="uacme"/>
+		<rom label="vfs.lib.so"/>
+		<rom label="vfs_jitterentropy.lib.so"/>
+		<rom label="vfs_lxip.lib.so"/>
+		<rom label="vfs_pipe.lib.so"/>
+		<rom label="zlib.lib.so"/>
+	</content>
+</runtime>
