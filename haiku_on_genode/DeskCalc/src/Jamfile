@@ -1,0 +1,32 @@
+#SubDir HAIKU_TOP src apps deskcalc ;
+SubDir TOP hai-src apps deskcalc ;
+
+SetSubDirSupportedPlatformsBeOSCompatible ;
+
+UsePrivateHeaders interface shared ;
+# HoG_GENODE: we compile shared/ExpressionParser.cpp directly here:
+SEARCH_SOURCE += [ FDirName $(TOP) haiku-on-genode kits shared-private ] ;
+SubDirHdrs $(TOP)/hai-src/libs/mapm ;
+AddStaticLibrary_abiRelocated  DeskCalc : libmapm.a ;
+
+Application DeskCalc :
+	CalcApplication.cpp
+	CalcOptions.cpp
+	CalcView.cpp
+	CalcWindow.cpp
+	DeskCalc.cpp
+	ExpressionTextView.cpp
+	InputTextView.cpp
+	# HoG_GENODE: take a shortcut: instead of linking with libexpression_parser.a, include the file directly here:
+	ExpressionParser.cpp
+	: be [ TargetLibstdc++ ] localestub libexpression_parser.a libmapm.a shared
+	: DeskCalc.rdef
+;
+
+DoCatalogs DeskCalc :
+	x-vnd.Haiku-DeskCalc
+	:
+	CalcApplication.cpp
+	CalcView.cpp
+	CalcWindow.cpp
+;
