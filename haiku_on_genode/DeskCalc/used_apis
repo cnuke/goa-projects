@@ -1,4 +1,9 @@
-cnuke/api/libc
+cnuke/api/base
+cnuke/api/framebuffer_session
+cnuke/api/gui_session
+cnuke/api/input_session
 cnuke/api/haiku_on_genode
+cnuke/api/libc
+cnuke/api/nitpicker_gfx
 cnuke/api/os
 cnuke/api/stdcxx
