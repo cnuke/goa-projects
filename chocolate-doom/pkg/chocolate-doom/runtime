@@ -1,6 +1,6 @@
 <runtime ram="80M" caps="512" binary="chocolate-doom">
 
-	<requires> <audio_out/> <audio_in/> <gui/> <nic/> <timer/> </requires>
+	<requires> <play/> <gui/> <nic/> <timer/> </requires>
 
 	<config ld_verbose="yes">
 		<arg value="chocolate-doom"/>
@@ -14,7 +14,7 @@
 			<dir name="dev">
 				<log/> <inline name="rtc">2023-09-19 12:00</inline>
 				<null/>
-				<oss name="dsp"/>
+				<oss name="dsp" record_enabled="false"/>
 			</dir>
 			<dir name="socket"> <lwip dhcp="yes"/> </dir>
 			<rom name="doom1.wad"/>
@@ -36,6 +36,7 @@
 		<rom label="expat.lib.so"/>
 		<rom label="glapi.lib.so"/>
 		<rom label="mesa.lib.so"/>
+		<rom label="opus.lib.so"/>
 		<rom label="sdl2.lib.so"/>
 		<rom label="sdl2_mixer.lib.so"/>
 		<rom label="sdl2_net.lib.so"/>
