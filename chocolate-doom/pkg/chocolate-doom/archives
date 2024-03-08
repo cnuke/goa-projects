@@ -7,6 +7,7 @@ cnuke/src/libflac
 cnuke/src/libogg
 cnuke/src/libvorbis
 cnuke/src/mesa
+cnuke/src/opus
 cnuke/src/sdl2
 cnuke/src/sdl2_mixer
 cnuke/src/sdl2_net
