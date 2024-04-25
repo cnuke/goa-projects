@@ -2,10 +2,8 @@
 
 	<requires>
 		<gui/>
-		<gpu/>
-		<audio_out/>
+		<play/>
 		<timer/>
-		<rom label="mesa_gpu_drv.lib.so"/>
 	</requires>
 
 	<content>
@@ -50,16 +48,16 @@
 			<service name="Gui"/>
 			<service name="Timer"/>
 			<service name="Gpu"/>
-			<service name="Audio_out"/>
+			<service name="Play"/>
 		</parent-provides>
 
 		<default-route> <any-service> <parent/> <any-child/> </any-service> </default-route>
 
 		<start name="black_hole" caps="100">
 			<resource name="RAM" quantum="1M"/>
-			<provides> <service name="Audio_in"/> </provides>
+			<provides> <service name="ROM"/> <service name="Gpu"/> </provides>
 			<config>
-				<audio_in/>
+				<rom/> <gpu/>
 			</config>
 			<route>
 				<any-service> <parent/> <any-child/> </any-service>
@@ -70,18 +68,22 @@
 			<resource name="RAM" quantum="250M"/>
 			<exit propagate="yes"/>
 			<config ld_verbose="yes">
+				<initial width="640" height="480"/>
 				<vfs>
-					<dir name="dev"> <log/> <oss name="dsp"/> <gpu/> </dir>
+					<dir name="dev">
+						<log/>
+						<oss name="dsp" record_enabled="false"/>
+						<gpu/>
+						<inline name="rtc">2024-04-25 12:00</inline>
+					</dir>
 					<dir name="baseq2">
 						<ram/>
 						<rom name="pak0.pak"/>
 						<rom name="game.so"/>
 					</dir>
 					<rom name="ref_soft.so"/>
-					<!--<rom name="ref_gl1.so"/>-->
-					<!--<rom name="ref_gl3.so"/>-->
 				</vfs>
-				<libc stdout="/dev/log" stderr="/dev/log"/>
+				<libc stdout="/dev/log" stderr="/dev/log" rtc="/dev/rtc"/>
 			</config>
 			<route>
 				<service name="ROM" label="game.so">
@@ -90,19 +92,13 @@
 				<service name="ROM" label="ref_soft.so">
 					<parent label="ref_soft.lib.so"/>
 				</service>
-				<service name="ROM" label="ref_gl1.so">
-					<parent label="ref_gl1.lib.so"/>
-				</service>
-				<service name="ROM" label="ref_gl3.so">
-					<parent label="ref_gl3.lib.so"/>
-				</service>
 				<service name="ROM" label="libcurl.so">
 					<parent label="curl.lib.so"/>
 				</service>
 				<service name="ROM" label="mesa_gpu_drv.lib.so">
-					<parent label="mesa_gpu_drv.lib.so"/>
+					<child name="black_hole"/>
 				</service>
-				<service name="Audio_in">
+				<service name="Gpu">
 					<child name="black_hole"/>
 				</service>
 				<any-service> <parent/> <any-child/> </any-service>
