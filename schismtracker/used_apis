@@ -1,6 +1,5 @@
-jws/api/base
-jws/api/libc
-jws/api/mesa
-jws/api/sdl2
-jws/api/stdcxx
-jws/api/zlib
+cnuke/api/libc
+cnuke/api/mesa
+cnuke/api/sdl2
+cnuke/api/stdcxx
+cnuke/api/zlib
