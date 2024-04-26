@@ -2,11 +2,10 @@
 
 	<requires>
 		<gui/>
-		<gpu/>
-		<audio_out/>
+		<play/>
 		<timer/>
-		<rom label="mesa_gpu_drv.lib.so"/>
 		<file_system label="home"/>
+		<file_system label="media"/>
 	</requires>
 
 	<content>
@@ -40,8 +39,7 @@
 			<service name="LOG"/>
 			<service name="Gui"/>
 			<service name="Timer"/>
-			<service name="Gpu"/>
-			<service name="Audio_out"/>
+			<service name="Play"/>
 			<service name="File_system"/>
 		</parent-provides>
 
@@ -49,10 +47,10 @@
 
 		<start name="black_hole" caps="100">
 			<resource name="RAM" quantum="1M"/>
-			<provides> <service name="Audio_in"/> </provides>
-			<config>
-				<audio_in/>
-			</config>
+			<provides> <service name="ROM"/> <service name="Gpu"/> </provides>
+				<config>
+					<rom/> <gpu/>
+				</config>
 			<route>
 				<any-service> <parent/> <any-child/> </any-service>
 			</route>
@@ -65,24 +63,27 @@
 				<env key="HOME" value="/home"/>
 				<vfs>
 					<dir name="dev">
-						<log/> <oss name="dsp"/> <gpu/>
+						<log/> <oss name="dsp" record_enabled="false"/> <gpu/>
 						<inline name="rtc">2023-09-21 12:00</inline>
 						<dir name="pipe"> <pipe/> </dir>
 					</dir>
 					<dir name="home">
 						<fs label="home"/>
 					</dir>
+					<dir name="media">
+						<fs label="media"/>
+					</dir>
 				</vfs>
 				<libc stdout="/dev/log" stderr="/dev/log" rtc="/dev/rtc"
 				      pipe="/dev/pipe"/>
 			</config>
 			<route>
+				<service name="File_system" label="home">  <parent label="home"/> </service>
+				<service name="File_system" label="media"> <parent label="media"/> </service>
 				<service name="ROM" label="mesa_gpu_drv.lib.so">
-					<parent label="mesa_gpu_drv.lib.so"/>
-				</service>
-				<service name="Audio_in">
 					<child name="black_hole"/>
 				</service>
+				<service name="Gpu"> <child name="black_hole"/> </service>
 				<any-service> <parent/> <any-child/> </any-service>
 			</route>
 		</start>
