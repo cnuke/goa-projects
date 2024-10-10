@@ -1,4 +1,4 @@
-<runtime ram="80M" caps="550" binary="init">
+<runtime ram="80M" caps="500" binary="init">
 
 	<requires>
 		<gui/>
@@ -57,7 +57,7 @@
 			</route>
 		</start>
 
-		<start name="milkytracker" caps="200">
+		<start name="milkytracker" caps="250">
 			<resource name="RAM" quantum="64M"/>
 			<exit propagate="yes"/>
 			<config ld_verbose="yes">
