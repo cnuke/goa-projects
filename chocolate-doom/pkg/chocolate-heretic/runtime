@@ -2,7 +2,7 @@
 
 	<requires> <play/> <gui/> <nic/> <timer/> </requires>
 
-	<config ld_verbose="yes">
+	<config ld_verbose="yes" mouse_grab="true">
 		<initial width="800" height="600"/>
 
 		<arg value="chocolate-doom"/>

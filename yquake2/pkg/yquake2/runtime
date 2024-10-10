@@ -67,7 +67,7 @@
 		<start name="quake2" caps="5000">
 			<resource name="RAM" quantum="250M"/>
 			<exit propagate="yes"/>
-			<config ld_verbose="yes">
+			<config ld_verbose="yes" mouse_grab="true">
 				<initial width="640" height="480"/>
 				<vfs>
 					<dir name="dev">
