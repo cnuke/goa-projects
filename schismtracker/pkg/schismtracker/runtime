@@ -60,6 +60,7 @@
 			<resource name="RAM" quantum="64M"/>
 			<exit propagate="yes"/>
 			<config ld_verbose="yes">
+				<initial width="1024" height="768"/>
 				<env key="HOME" value="/home"/>
 				<vfs>
 					<dir name="dev">
