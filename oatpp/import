@@ -1,0 +1,9 @@
+LICENSE   := Apache 2.0
+VERSION   := 1.3.0-latest
+DOWNLOADS := oatpp.archive
+
+BASE_URL := https://github.com/oatpp/oatpp/archive/refs/tags
+
+URL(oatpp) := $(BASE_URL)/$(VERSION).tar.gz
+SHA(oatpp) := adc3b88076532838cd0fb8155872d6a9467ac0cb5df319735a2396ce6945d064
+DIR(oatpp) := src
