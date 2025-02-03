@@ -1,0 +1,3 @@
+set license src/LICENSE
+set version(cnuke/api/oatpp) 1.3.0-latest-2025-02-03
+
