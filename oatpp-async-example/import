@@ -1,0 +1,10 @@
+LICENSE   := Apache 2.0
+VERSION   := 1.3.0-latest
+DOWNLOADS := oatpp.archive
+
+BASE_URL := https://github.com/oatpp/oatpp/archive/refs/tags
+BASE_URL := https://github.com/oatpp/example-async-api/archive/refs/tags
+
+URL(oatpp) := $(BASE_URL)/$(VERSION).tar.gz
+SHA(oatpp) := 6b605112c39c7b65c0aee588c6881fab4f375eb16f21b0d9af7a4d92d98b424d
+DIR(oatpp) := src

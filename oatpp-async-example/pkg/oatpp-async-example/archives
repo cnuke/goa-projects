@@ -1,0 +1,8 @@
+cnuke/src/libc
+cnuke/src/oatpp/1.3.0-latest-2025-02-03
+cnuke/src/posix
+cnuke/src/stdcxx
+cnuke/src/vfs
+cnuke/src/vfs_jitterentropy
+cnuke/src/vfs_lxip
+cnuke/src/vfs_pipe

@@ -1,0 +1,43 @@
+<runtime ram="90M" caps="600" binary="example-async-api-exe">
+
+	<requires>
+		<nic>
+			<tcp-forward port="8000" domain="default" to="10.0.10.2/24"/>
+		</nic>
+		<rtc/>
+		<timer/>
+	</requires>
+
+
+	<config ld_verbose="yes">
+		<vfs>
+			<dir name="socket">
+				<lxip dhcp="yes"/>
+			</dir>
+			<dir name="dev">
+				<log/>
+				<rtc/>
+				<jitterentropy name="random"/>
+				<dir name="pipe"> <pipe/> </dir>
+			</dir>
+		</vfs>
+		<libc stdin="/dev/log" stdout="/dev/log" stderr="/dev/log"
+		      socket="/socket" rtc="/dev/rtc" pipe="/dev/pipe">
+		</libc>
+	</config>
+
+	<content>
+		<rom label="example-async-api-exe"/>
+		<rom label="ld.lib.so"/>
+		<rom label="libc.lib.so"/>
+		<rom label="libm.lib.so"/>
+		<rom label="liboatpp.lib.so"/>
+		<rom label="lxip.lib.so"/>
+		<rom label="posix.lib.so"/>
+		<rom label="stdcxx.lib.so"/>
+		<rom label="vfs.lib.so"/>
+		<rom label="vfs_jitterentropy.lib.so"/>
+		<rom label="vfs_lxip.lib.so"/>
+		<rom label="vfs_pipe.lib.so"/>
+	</content>
+</runtime>
