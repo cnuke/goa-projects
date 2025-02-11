@@ -1,0 +1,9 @@
+cnuke/api/base
+cnuke/api/ffi
+cnuke/api/glib
+cnuke/api/libc
+cnuke/api/libiconv
+cnuke/api/ncurses
+cnuke/api/openssl
+cnuke/api/pcre
+cnuke/api/posix
