@@ -1,0 +1,2 @@
+install/bin/irssi
+share.tar: install/share/irssi

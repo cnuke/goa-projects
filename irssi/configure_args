@@ -1,0 +1,2 @@
+--with-perl=no
+--disable-utf8proc

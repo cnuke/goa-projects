@@ -1,0 +1,15 @@
+LICENSE   := GPLv2
+VERSION   := 1.4.5
+DOWNLOADS := irssi.archive
+
+BASE_URL   := https://github.com/irssi/irssi/releases/download/
+URL(irssi) := $(BASE_URL)/$(VERSION)/irssi-$(VERSION).tar.xz
+SHA(irssi) := 72a951cb0ad622785a8962801f005a3a412736c7e7e3ce152f176287c52fe062
+DIR(irssi) := src
+
+PATCHES := \
+	patches/disarm_nonblock_connect.patch \
+	patches/path_max.patch
+
+src/irssi-config.h: _dirs
+	$(VERBOSE)rm src/irssi-config.h

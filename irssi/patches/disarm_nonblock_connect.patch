@@ -1,0 +1,15 @@
+Using fork in this way leads to an exception in our libc
+down the road - for now ignore that and use the blocking
+connect mechanism.
+--- src/src/core/net-nonblock.c
++++ src/src/core/net-nonblock.c
+@@ -37,7 +37,8 @@
+ 
+ 	g_return_val_if_fail(addr != NULL, FALSE);
+ 
+-	pid = fork();
++	// pid = fork();
++	pid = -1;
+ 	if (pid > 0) {
+ 		/* parent */
+ 		pidwait_add(pid);
