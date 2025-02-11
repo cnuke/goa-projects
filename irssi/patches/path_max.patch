@@ -1,0 +1,13 @@
+PATH_MAX should have been defined via libc headers - just hardcode
+the value used there.
+--- src/src/lib-config/write.c
++++ src/src/lib-config/write.c
+@@ -306,7 +306,7 @@
+ 	char *tmp_name = NULL;
+ 	char *dest_name = NULL;
+ #if !defined(_POSIX_VERSION) || _POSIX_VERSION < 200809L
+-	char resolved_path[PATH_MAX] = { 0 };
++	char resolved_path[1024] = { 0 };
+ #endif
+ 
+ 	g_return_val_if_fail(rec != NULL, -1);

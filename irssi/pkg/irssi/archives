@@ -1,0 +1,15 @@
+cnuke/src/ffi
+cnuke/src/glib
+cnuke/src/init
+cnuke/src/libc
+cnuke/src/libiconv
+cnuke/src/ncurses
+cnuke/src/openssl
+cnuke/src/pcre
+cnuke/src/posix
+cnuke/src/terminal
+cnuke/src/vfs
+cnuke/src/vfs_jitterentropy
+cnuke/src/vfs_lwip
+cnuke/src/vfs_pipe
+cnuke/src/zlib
