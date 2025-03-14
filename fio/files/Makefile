@@ -1,0 +1,19 @@
+all: fio/fio
+
+unexport MAKEFLAGS
+
+fio/fio: fio/configure_done
+	cd fio && make fio
+
+fio/configure_done: Makefile
+	cd fio && \
+	./configure --prefix=/ \
+	            --cross-prefix=${CROSS_DEV_PREFIX} \
+	            --extra-cflags="${CPPFLAGS}" \
+	            --extra-cflags=-DCONFIG_NO_SHM \
+	            --extra-cflags=-DFIO_NO_HAVE_SHM_H \
+	            --extra-libs="${LDLIBS}" \
+	&& touch configure_done
+
+.PHONY: fio/make_run
+.NOTPARALLEL: fio/make_run fio/configure_done

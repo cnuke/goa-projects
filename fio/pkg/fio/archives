@@ -1,0 +1,6 @@
+cnuke/src/libc
+cnuke/src/posix
+cnuke/src/vfs
+cnuke/src/vfs_jitterentropy
+cnuke/src/vfs_pipe
+cnuke/src/zlib
