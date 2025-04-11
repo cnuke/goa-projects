@@ -1,0 +1,11 @@
+cnuke/api/libc
+cnuke/api/libflac
+cnuke/api/libiconv
+cnuke/api/libmad
+cnuke/api/libogg
+cnuke/api/libvorbis
+cnuke/api/ncurses
+cnuke/api/opus
+cnuke/api/opusfile
+cnuke/api/posix
+cnuke/api/so

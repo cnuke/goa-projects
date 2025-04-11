@@ -1,0 +1,7 @@
+cmus/cmus
+cmus/ip/flac.so
+cmus/ip/mad.so
+cmus/ip/opus.so
+cmus/ip/vorbis.so
+cmus/ip/wav.so
+cmus/op/oss.so

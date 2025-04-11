@@ -1,0 +1,102 @@
+--- src/cmus/configure
++++ src/cmus/configure
+@@ -282,7 +282,7 @@
+ 		pkg_config VORBIS "vorbisidec" "" "-lvorbisidec -lm"
+ 		return $?
+ 	else
+-		pkg_config VORBIS "vorbisfile" "" "-lvorbisfile -lvorbis -lm -logg"
++		pkg_config VORBIS "vorbisfile" "" "-lvorbis -lm -logg"
+ 		return $?
+ 	fi
+ }
+@@ -295,7 +295,7 @@
+ 
+ check_opus()
+ {
+-	pkg_config OPUS "opusfile"
++	pkg_config OPUS "opus" "" "-lopusfile -lopus"
+ 	return $?
+ }
+ 
+--- src/cmus/Makefile
++++ src/cmus/Makefile
+@@ -16,6 +16,9 @@
+ -include config.mk
+ include scripts/lib.mk
+ 
++LDSOLFLAGS := $(MAKE_SHARED_LINKER_FLAGS)
++LDDLFLAGS := $(MAKE_SHARED_LINKER_FLAGS)
++
+ CFLAGS += -D_FILE_OFFSET_BITS=64
+ 
+ FFMPEG_CFLAGS += $(shell pkg-config --cflags libswresample)
+--- src/cmus/scripts/checks.sh
++++ src/cmus/scripts/checks.sh
+@@ -645,8 +645,8 @@
+ 		check_library PTHREAD "-D_REENTRANT" "$__libs" && return 0
+ 	done
+ 	echo "using -pthread gcc option"
+-	makefile_var PTHREAD_CFLAGS "-pthread -D_THREAD_SAFE"
+-	makefile_var PTHREAD_LIBS "-pthread"
++	makefile_var PTHREAD_CFLAGS "-D_THREAD_SAFE"
++	makefile_var PTHREAD_LIBS ""
+ 	return 0
+ }
+ 
+--- src/cmus/scripts/lib.mk
++++ src/cmus/scripts/lib.mk
+@@ -103,11 +103,11 @@
+ 
+ # LD for shared libraries, optional parameter: libraries
+ quiet_cmd_ld_so = LD     $@
+-      cmd_ld_so = $(LD) $(LDSOFLAGS) $(LDFLAGS) -o $@ $^ $(1)
++      cmd_ld_so = $(LD) $(LDSOFLAGS) -o $@ $^ $(1)
+ 
+ # LD for dynamically loadable modules, optional parameter: libraries
+ quiet_cmd_ld_dl = LD     $@
+-      cmd_ld_dl = $(LD) $(LDDLFLAGS) $(LDFLAGS) -o $@ $^ $(1)
++      cmd_ld_dl = $(LD) $(LDDLFLAGS) -o $@ $^ $(1)
+ 
+ # CXX for program object files (.o)
+ quiet_cmd_cxx    = CXX    $@
+--- src/cmus/server.c
++++ src/cmus/server.c
+@@ -51,7 +51,7 @@
+ #include <fcntl.h>
+ #include <ctype.h>
+ 
+-int server_socket;
++int server_socket = -1;
+ LIST_HEAD(client_head);
+ 
+ static char *title_buf = NULL;
+@@ -365,7 +365,7 @@ void server_init(char *address)
+ 
+ 	server_socket = socket(addr.sa.sa_family, SOCK_STREAM, 0);
+ 	if (server_socket == -1)
+-		die_errno("socket");
++		return;
+ 
+ 	if (bind(server_socket, &addr.sa, addrlen) == -1) {
+ 		int sock;
+--- src/cmus/ui_curses.c
++++ src/cmus/ui_curses.c
+@@ -2185,7 +2185,8 @@ static void main_loop(void)
+ 		SELECT_ADD_FD(0);
+ 		SELECT_ADD_FD(job_fd);
+ 		SELECT_ADD_FD(cmus_next_track_request_fd);
+-		SELECT_ADD_FD(server_socket);
++		if (server_socket > 0)
++			SELECT_ADD_FD(server_socket);
+ 		if (mpris_fd != -1)
+ 			SELECT_ADD_FD(mpris_fd);
+ 		list_for_each_entry(client, &client_head, node) {
+@@ -2233,7 +2234,7 @@ static void main_loop(void)
+ 				update_statusline();
+ 			}
+ 		}
+-		if (FD_ISSET(server_socket, &set))
++		if (server_socket > 0 && FD_ISSET(server_socket, &set))
+ 			server_accept();
+ 
+ 		// server_serve() can remove client from the list
