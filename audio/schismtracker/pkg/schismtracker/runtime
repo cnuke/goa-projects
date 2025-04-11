@@ -1,4 +1,4 @@
-<runtime ram="80M" caps="500" binary="init">
+<runtime ram="80M" caps="550" binary="init">
 
 	<requires>
 		<gui/>
@@ -20,13 +20,13 @@
 		<rom label="libiconv.lib.so"/>
 		<rom label="libm.lib.so"/>
 		<rom label="mesa.lib.so"/>
-		<rom label="milky.xm"/>
-		<rom label="milkytracker"/>
+		<rom label="schismtracker"/>
 		<rom label="sdl2.lib.so"/>
 		<rom label="stdcxx.lib.so"/>
 		<rom label="vfs.lib.so"/>
 		<rom label="vfs_gpu.lib.so"/>
 		<rom label="vfs_oss.lib.so"/>
+		<rom label="vfs_pipe.lib.so"/>
 		<rom label="zlib.lib.so"/>
 	</content>
 
@@ -39,7 +39,6 @@
 			<service name="LOG"/>
 			<service name="Gui"/>
 			<service name="Timer"/>
-			<service name="Gpu"/>
 			<service name="Play"/>
 			<service name="File_system"/>
 		</parent-provides>
@@ -57,20 +56,17 @@
 			</route>
 		</start>
 
-		<start name="milkytracker" caps="250">
+		<start name="schismtracker" caps="400">
 			<resource name="RAM" quantum="64M"/>
 			<exit propagate="yes"/>
 			<config ld_verbose="yes">
 				<initial width="1024" height="768"/>
-				<env key="NO_OPENGL" value="1"/>
+				<env key="HOME" value="/home"/>
 				<vfs>
 					<dir name="dev">
 						<log/> <oss name="dsp" record_enabled="false"/> <gpu/>
 						<inline name="rtc">2023-09-21 12:00</inline>
-					</dir>
-					<dir name="tmp">
-						<ram/>
-						<rom name="milky.xm"/>
+						<dir name="pipe"> <pipe/> </dir>
 					</dir>
 					<dir name="home">
 						<fs label="home"/>
@@ -79,11 +75,12 @@
 						<fs label="media"/>
 					</dir>
 				</vfs>
-				<libc stdout="/dev/log" stderr="/dev/log" rtc="/dev/rtc"/>
+				<libc stdout="/dev/log" stderr="/dev/log" rtc="/dev/rtc"
+				      pipe="/dev/pipe"/>
 			</config>
 			<route>
-				<service name="File_system" label="home">  <parent label="home"/> </service>
-				<service name="File_system" label="media"> <parent label="media"/> </service>
+				<service name="File_system" label="home">  <parent label="home -> /"/> </service>
+				<service name="File_system" label="media"> <parent label="media -> /"/> </service>
 				<service name="ROM" label="mesa_gpu_drv.lib.so">
 					<child name="black_hole"/>
 				</service>

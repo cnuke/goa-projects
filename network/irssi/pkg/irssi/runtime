@@ -31,10 +31,10 @@
 			<provides> <service name="Terminal"/> </provides>
 			<config copy="yes" paste="yes">
 				<initial width="800" height="600"/>
-				<vfs> <dir name="fonts"> <fs/> </dir> </vfs>
+				<vfs> <dir name="fonts"> <fs label="fonts -> /"/> </dir> </vfs>
 			</config>
 			<route>
-				<service name="File_system"> <parent label="fonts"/>    </service>
+				<service name="File_system" label_prefix="fonts ->"> <parent identity="fonts"/> </service>
 				<service name="Gui">         <parent label="terminal"/> </service>
 				<service name="Report" label="clipboard"> <parent label="clipboard"/> </service>
 				<service name="ROM"    label="clipboard"> <parent label="clipboard"/> </service>
@@ -74,7 +74,7 @@
 				</libc>
 			</config>
 			<route>
-				<service name="File_system"> <parent label="home"/> </service>
+				<service name="File_system" label="home"> <parent label="home -> /"/> </service>
 				<service name="Terminal"> <child name="terminal"/> </service>
 				<any-service> <parent/> <any-child/> </any-service>
 			</route>
