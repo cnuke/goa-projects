@@ -39,6 +39,7 @@
 		<rom label="glapi.lib.so"/>
 		<rom label="mesa.lib.so"/>
 		<rom label="opus.lib.so"/>
+		<rom label="opusfile.lib.so"/>
 		<rom label="sdl2.lib.so"/>
 		<rom label="sdl2_mixer.lib.so"/>
 		<rom label="sdl2_net.lib.so"/>

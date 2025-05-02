@@ -5,7 +5,7 @@
 	<config ld_verbose="yes" mouse_grab="true">
 		<initial width="800" height="600"/>
 
-		<arg value="chocolate-doom"/>
+		<arg value="chocolate-heretic"/>
 		<libc stdout="/dev/log" stderr="/dev/log" stdin="/dev/null" rtc="/dev/rtc"/>
 		<vfs>
 			<dir name="dev">
@@ -32,6 +32,8 @@
 		<rom label="libogg.lib.so"/>
 		<rom label="libvorbis.lib.so"/>
 		<rom label="mesa.lib.so"/>
+		<rom label="opus.lib.so"/>
+		<rom label="opusfile.lib.so"/>
 		<rom label="sdl2.lib.so"/>
 		<rom label="sdl2_mixer.lib.so"/>
 		<rom label="sdl2_net.lib.so"/>
