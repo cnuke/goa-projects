@@ -83,6 +83,10 @@
 					</dir>
 					<rom name="ref_soft.so"/>
 				</vfs>
+				<arg value="quake2"/>
+				<arg value="+set"/>
+				<arg value="r_mode"/>
+				<arg value="4"/>
 				<libc stdout="/dev/log" stderr="/dev/log" rtc="/dev/rtc"/>
 			</config>
 			<route>

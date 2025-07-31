@@ -1,18 +1,18 @@
-<runtime ram="256M" caps="5600" binary="init">
+<runtime ram="280M" caps="5000" binary="quake2">
 
 	<requires>
 		<gui/>
 		<gpu/>
 		<play/>
 		<timer/>
-		<rom label="mesa_gpu_drv.lib.so"/>
+		<rom label="mesa_gpu.lib.so"/>
 	</requires>
 
 	<content>
-		<rom label="curl.lib.so"/>
+		<rom label="curl.lib.so" as="libcurl.so"/>
 		<rom label="egl.lib.so"/>
 		<rom label="expat.lib.so"/>
-		<rom label="game.lib.so"/>
+		<rom label="game.lib.so" as="game.so"/>
 		<rom label="glapi.lib.so"/>
 		<rom label="init"/>
 		<rom label="jpeg.lib.so"/>
@@ -28,9 +28,8 @@
 		<rom label="mesa.lib.so"/>
 		<rom label="pak0.pak"/>
 		<rom label="quake2"/>
-		<rom label="ref_gl1.lib.so"/>
-		<rom label="ref_gl3.lib.so"/>
-		<rom label="ref_soft.lib.so"/>
+		<rom label="ref_gl1.lib.so" as="ref_gl1.so"/>
+		<rom label="ref_gl3.lib.so" as="ref_gl3.so"/>
 		<rom label="sdl2.lib.so"/>
 		<rom label="stdcxx.lib.so"/>
 		<rom label="vfs.lib.so"/>
@@ -39,66 +38,27 @@
 		<rom label="zlib.lib.so"/>
 	</content>
 
-	<config>
-		<parent-provides>
-			<service name="ROM"/>
-			<service name="PD"/>
-			<service name="RM"/>
-			<service name="CPU"/>
-			<service name="LOG"/>
-			<service name="Gui"/>
-			<service name="Timer"/>
-			<service name="Gpu"/>
-			<service name="Play"/>
-		</parent-provides>
-
-		<default-route> <any-service> <parent/> <any-child/> </any-service> </default-route>
-
-		<start name="quake2" caps="5000">
-			<resource name="RAM" quantum="250M"/>
-			<exit propagate="yes"/>
-			<config ld_verbose="yes">
-				<initial width="640" height="480"/>
-				<vfs>
-					<dir name="dev">
-						<log/>
-						<oss name="dsp" record_enabled="false"/>
-						<gpu/>
-						<inline name="rtc">2024-04-25 12:00</inline>
-					</dir>
-					<dir name="baseq2">
-						<ram/>
-						<rom name="pak0.pak"/>
-						<rom name="game.so"/>
-					</dir>
-					<rom name="ref_soft.so"/>
-					<rom name="ref_gl1.so"/>
-					<!--<rom name="ref_gl3.so"/>-->
-				</vfs>
-				<libc stdout="/dev/log" stderr="/dev/log" rtc="/dev/rtc"/>
-			</config>
-			<route>
-				<service name="ROM" label="game.so">
-					<parent label="game.lib.so"/>
-				</service>
-				<service name="ROM" label="ref_soft.so">
-					<parent label="ref_soft.lib.so"/>
-				</service>
-				<service name="ROM" label="ref_gl1.so">
-					<parent label="ref_gl1.lib.so"/>
-				</service>
-				<service name="ROM" label="ref_gl3.so">
-					<parent label="ref_gl3.lib.so"/>
-				</service>
-				<service name="ROM" label="libcurl.so">
-					<parent label="curl.lib.so"/>
-				</service>
-				<service name="ROM" label="mesa_gpu_drv.lib.so">
-					<parent label="mesa_gpu_drv.lib.so"/>
-				</service>
-				<any-service> <parent/> <any-child/> </any-service>
-			</route>
-		</start>
+	<config ld_verbose="yes" mouse_grab="true">
+		<initial width="1024" height="768"/>
+		<vfs>
+			<dir name="dev">
+				<log/>
+				<oss name="dsp" record_enabled="false"/>
+				<gpu/>
+				<inline name="rtc">2025-04-14 12:00</inline>
+			</dir>
+			<dir name="baseq2">
+				<ram/>
+				<rom name="pak0.pak"/>
+				<rom name="game.so"/>
+			</dir>
+			<rom name="ref_gl1.so"/>
+			<rom name="ref_gl3.so"/>
+		</vfs>
+		<arg value="quake2"/>
+		<arg value="+set"/>
+		<arg value="r_mode"/>
+		<arg value="10"/>
+		<libc stdout="/dev/log" stderr="/dev/log" rtc="/dev/rtc"/>
 	</config>
-
 </runtime>
