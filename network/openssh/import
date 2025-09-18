@@ -1,0 +1,10 @@
+LICENSE   := BSD
+VERSION   := 9.9p2
+DOWNLOADS := openssh.archive
+
+BASE_URL := https://cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable
+URL(openssh) := $(BASE_URL)/openssh-$(VERSION).tar.gz
+SHA(openssh) := 91aadb603e08cc285eddf965e1199d02585fa94d994d6cae5b41e1721e215673
+DIR(openssh) := src
+
+PATCHES := patches/configure.patch

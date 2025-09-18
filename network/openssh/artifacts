@@ -1,0 +1,8 @@
+install/bin/ssh
+install/sbin/sshd
+install/libexec/sftp-server
+install/libexec/ssh-keysign
+install/libexec/ssh-pkcs11-helper
+install/libexec/ssh-sk-helper
+install/libexec/sshd-session
+etc.tar: install/etc
