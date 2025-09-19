@@ -1,0 +1,103 @@
+<runtime ram="90M" caps="600" binary="init">
+
+	<requires>
+		<file_system label="fonts" writeable="no"/>
+		<file_system label="home"  writeable="yes"/>
+		<gui/>
+		<nic/>
+		<report label="clipboard"/>
+		<rom    label="clipboard"/>
+		<rtc/>
+		<timer/>
+	</requires>
+
+	<config>
+		<parent-provides>
+			<service name="ROM"/>
+			<service name="PD"/>
+			<service name="RM"/>
+			<service name="CPU"/>
+			<service name="LOG"/>
+			<service name="Timer"/>
+			<service name="File_system"/>
+			<service name="Gui"/>
+			<service name="Report"/>
+			<service name="Rtc"/>
+			<service name="Nic"/>
+		</parent-provides>
+
+		<start name="terminal" caps="150">
+			<resource name="RAM" quantum="48M"/>
+			<provides> <service name="Terminal"/> </provides>
+			<config copy="yes" paste="yes">
+				<initial width="800" height="600"/>
+				<vfs> <dir name="fonts"> <fs label="fonts -> /"/> </dir> </vfs>
+			</config>
+			<route>
+				<service name="File_system" label_prefix="fonts ->"> <parent identity="fonts"/> </service>
+				<service name="Gui">         <parent label="terminal"/> </service>
+				<service name="Report" label="clipboard"> <parent label="clipboard"/> </service>
+				<service name="ROM"    label="clipboard"> <parent label="clipboard"/> </service>
+				<any-service> <parent/> <any-child/> </any-service>
+			</route>
+		</start>
+
+		<start name="ssh" caps="400">
+			<exit propagate="yes"/>
+			<resource name="RAM" quantum="32M"/>
+			<config ld_verbose="yes">
+				<env key="TERM" value="screen"/>
+				<env key="LC_CTYPE" value="en_US.UTF-8"/>
+				<arg value="ssh"/>
+				<arg value="-v"/>
+				<arg value="-v"/>
+				<arg value="-v"/>
+				<arg value="jws@10.0.23.42"/>
+				<vfs>
+					<dir name="socket">
+						<lxip dhcp="yes"/>
+					</dir>
+					<dir name="dev">
+						<null/>
+						<log/> <terminal name="tty"/>
+						<rtc/>
+						<jitterentropy name="random"/>
+						<dir name="pipe"> <pipe/> </dir>
+					</dir>
+					<dir name="etc">
+						<tar name="etc.tar"/>
+					</dir>
+					<dir name="home"> <fs label="home"/> </dir>
+				</vfs>
+				<libc stdin="/dev/tty" stdout="/dev/tty" stderr="/dev/log" socket="/socket" rtc="/dev/rtc" pipe="/dev/pipe">
+					<passwd name="genodian" home="/home"/>
+				</libc>
+			</config>
+			<route>
+				<service name="File_system" label="home"> <parent label="home -> /"/> </service>
+				<service name="Terminal"> <child name="terminal"/> </service>
+				<any-service> <parent/> <any-child/> </any-service>
+			</route>
+		</start>
+	</config>
+
+	<content>
+		<rom label="etc.tar"/>
+		<rom label="init"/>
+		<rom label="ssh"/>
+		<rom label="ld.lib.so"/>
+		<rom label="libc.lib.so"/>
+		<rom label="libcrypto.lib.so"/>
+		<rom label="libiconv.lib.so"/>
+		<rom label="libm.lib.so"/>
+		<rom label="libssl.lib.so"/>
+		<rom label="lxip.lib.so"/>
+		<rom label="posix.lib.so"/>
+		<rom label="terminal"/>
+		<rom label="vfs.lib.so"/>
+		<rom label="vfs_jitterentropy.lib.so"/>
+		<rom label="vfs_lxip.lib.so"/>
+		<rom label="vfs_pipe.lib.so"/>
+		<rom label="zlib.lib.so"/>
+	</content>
+</runtime>

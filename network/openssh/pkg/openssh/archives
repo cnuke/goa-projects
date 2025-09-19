@@ -1,0 +1,11 @@
+jws/src/init
+jws/src/libc
+jws/src/libiconv
+jws/src/openssl
+jws/src/posix
+jws/src/terminal
+jws/src/vfs
+jws/src/vfs_jitterentropy
+jws/src/vfs_lxip
+jws/src/vfs_pipe
+jws/src/zlib
