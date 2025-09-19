@@ -1,0 +1,6 @@
+cnuke/api/expat
+cnuke/api/libc
+cnuke/api/openssl
+cnuke/api/posix
+cnuke/api/so
+cnuke/api/zlib

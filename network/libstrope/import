@@ -1,0 +1,7 @@
+LICENSE   := GPLv3
+VERSION   := git
+DOWNLOADS := libstrophe.git
+
+URL(libstrophe) := https://github.com/strophe/libstrophe.git
+REV(libstrophe) := a2b3b6b9e255bc350c6182cd20bd28c7b289eddb
+DIR(libstrophe) := src
