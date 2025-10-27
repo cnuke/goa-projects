@@ -7,4 +7,4 @@ URL(openssh) := $(BASE_URL)/openssh-$(VERSION).tar.gz
 SHA(openssh) := 91aadb603e08cc285eddf965e1199d02585fa94d994d6cae5b41e1721e215673
 DIR(openssh) := src
 
-PATCHES := patches/configure.patch
+PATCHES := patches/configure.patch patches/arc4random_stir.patch

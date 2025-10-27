@@ -1,6 +1,6 @@
-cnuke/api/so
-cnuke/api/curl
-cnuke/api/libc
-cnuke/api/mesa
-cnuke/api/sdl2
-cnuke/api/zlib
+_/api/so
+_/api/curl
+_/api/libc
+_/api/mesa
+_/api/sdl2
+_/api/zlib

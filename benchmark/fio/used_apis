@@ -1,4 +1,4 @@
-cnuke/api/base
-cnuke/api/libc
-cnuke/api/posix
-cnuke/api/zlib
+_/api/base
+_/api/libc
+_/api/posix
+_/api/zlib

@@ -18,6 +18,28 @@
  	return $?
  }
  
+@@ -366,15 +366,15 @@
+ 	OSS_CFLAGS=""
+ 	OSS_LIBS=""
+ 	msg_checking "for header <sys/soundcard.h>"
+-	if test -f /usr/include/sys/soundcard.h
+-	then
++	# if test -f /usr/include/sys/soundcard.h
++	# then
+ 		msg_result "yes"
+ 		makefile_vars OSS_CFLAGS OSS_LIBS
+ 		return 0
+-	else
+-		msg_result "no"
+-	fi
+-	return 1
++	# else
++	# 	msg_result "no"
++	# fi
++	# return 1
+ }
+ 
+ check_sun()
 --- src/cmus/Makefile
 +++ src/cmus/Makefile
 @@ -16,6 +16,9 @@
