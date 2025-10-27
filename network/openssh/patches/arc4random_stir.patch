@@ -1,0 +1,22 @@
+Remove for now as it leads to a compile error and hope for
+the best. (sshd is not tested anyway.)
++++ src/sshd-session.c
+@@ -270,7 +270,6 @@
+ #ifdef WITH_OPENSSL
+ 	RAND_poll();
+ #endif
+-	arc4random_stir(); /* noop on recent arc4random() implementations */
+ 	arc4random_buf(rnd, sizeof(rnd)); /* let arc4random notice PID change */
+ 
+ #ifdef WITH_OPENSSL
+diff -N -u -r '--exclude=.git' '--exclude=*~' /home/jws/develop/sculpt-25.10-staging/goa-var/openssh/contrib/src/sshd.c src/sshd.c
+--- /home/jws/develop/sculpt-25.10-staging/goa-var/openssh/contrib/src/sshd.c	2025-10-27 18:03:23.017144674 +0100
++++ src/sshd.c	2025-10-27 18:08:05.532233072 +0100
+@@ -1110,7 +1110,6 @@
+ 			 * Ensure that our random state differs
+ 			 * from that of the child
+ 			 */
+-			arc4random_stir();
+ 			arc4random_buf(rnd, sizeof(rnd));
+ #ifdef WITH_OPENSSL
+ 			RAND_seed(rnd, sizeof(rnd));

@@ -1,4 +1,4 @@
-genodelabs/api/libc
-genodelabs/api/openssl
-genodelabs/api/posix
-genodelabs/api/zlib
+_/api/libc
+_/api/openssl
+_/api/posix
+_/api/zlib

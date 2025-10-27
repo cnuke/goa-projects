@@ -1,4 +1,4 @@
-cnuke/api/curl
-cnuke/api/libc
-cnuke/api/openssl
-cnuke/api/posix
+_/api/curl
+_/api/libc
+_/api/openssl
+_/api/posix
